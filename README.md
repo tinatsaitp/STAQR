@@ -1,2 +1,2 @@
 # STAQR
-CSCI 233 Group Project
+CSCI 233 Group Project - React Native
