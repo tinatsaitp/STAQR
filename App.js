@@ -9,30 +9,29 @@ import Animated, {
   withSpring,
   useAnimatedGestureHandler,
 } from 'react-native-reanimated';
-import {PanGestureHandler} from 'react-native-gesture-handler';
+import {gestureHandlerRootHOC, PanGestureHandler} from 'react-native-gesture-handler';
 
-const App = () => {
-  const translationX = useSharedValue(0);
+const App = gestureHandlerRootHOC(() => {
+  const translateX = useSharedValue(0);
+  const translateY = useSharedValue(0);
+
+  const gestureHandler = useAnimatedGestureHandler({
+    onStart: (_, context) => {
+      context.startX = translateX.value;
+      context.startY = translateY.value;
+    },
+    onActive: (event, context) => {
+      translateX.value = context.startX + event.translationX;
+      translateY.value = context.startY + event.translationY;
+    },
+  });
 
   const cardStyle = useAnimatedStyle(() => ({
     transform: [
-      {
-        translateX: translationX.value,
-      },
-    ]
+      {translateX: translateX.value,},
+      {translateY: translateY.value,},
+    ],
   }));
-
-  const gestureHandler = useAnimatedGestureHandler({
-    onStart: (_, ctx) => {
-      console.warn('Touch Start');
-    },
-    onActive: event => {
-      translationX.value = event.translationX;
-    },
-    onEnd: () => {
-      console.warn('Touch Ended');
-    },
-  });
 
   return (
     <View style={styles.pageContainer}>
@@ -41,7 +40,7 @@ const App = () => {
           <Card user={users[2]}/>
         </Animated.View>
       </PanGestureHandler>
-      
+            
       <View style={styles.navbar}>
         <Icon name='cards-diamond' style={styles.navIcon}/>
         <Icon name='cards-club' style={styles.navIcon}/>
@@ -49,7 +48,7 @@ const App = () => {
       </View>
     </View>
   );
-};
+},);
 
 const styles = StyleSheet.create({
   pageContainer: {
