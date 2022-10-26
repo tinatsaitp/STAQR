@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Dimensions, useWindowDimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Card from './src/components/card';
@@ -11,6 +11,7 @@ import Animated, {
   withSpring,
   useAnimatedGestureHandler,
   interpolate,
+  runOnJS,
 } from 'react-native-reanimated';
 import {gestureHandlerRootHOC, PanGestureHandler} from 'react-native-gesture-handler';
 
@@ -43,7 +44,7 @@ const App = gestureHandlerRootHOC(() => {
   const backRotate = useDerivedValue(() => interpolate(
     translateX.value,
     [-screenWidth, 0, screenWidth],
-    [5, 0, 5]) + 'deg',  
+    [5, -10, 5]) + 'deg',  
   );
   const backScale = useDerivedValue(() => interpolate(
     translateX.value,
@@ -65,8 +66,19 @@ const App = gestureHandlerRootHOC(() => {
       const destY = snapPoint(translateY.value, velocityX, SNAP_POINTS_Y);
       translateX.value = withSpring(destX, {velocity: velocityX});
       translateY.value = withSpring(destY, {velocity: velocityY});
+      runOnJS(setCurrentIndex)(currentIndex + 1);
+      runOnJS(setMiddleCardIndex)(middleCardIndex + 1);
+      runOnJS(setBackCardIndex)(backCardIndex + 1);
     },
   });
+
+  useEffect(() => {
+    translateX.value = 0;
+    translateY.value = 0;
+    setMiddleCardIndex(currentIndex + 1);
+    setBackCardIndex(middleCardIndex + 1);
+  }, [currentIndex, translateX, translateY]
+  );
 
   const cardStyle = useAnimatedStyle(() => ({
     transform: [
@@ -103,23 +115,29 @@ const App = gestureHandlerRootHOC(() => {
 
   return (
     <View style={styles.pageContainer}>
-      <View style={styles.backCard}>
-        <Animated.View style={[styles.animatedCard, backCardStyle]}>
-          <Card user={backCardProfile}/> 
-        </Animated.View> 
-      </View>
+      {backCardProfile && (
+        <View style={styles.backCard}>
+          <Animated.View style={[styles.animatedCard, backCardStyle]}>
+            <Card user={backCardProfile}/> 
+          </Animated.View> 
+        </View>
+      )}
+      
+      {middleCardProfile && (
+        <View style={styles.middleCard}>
+          <Animated.View style={[styles.animatedCard, middleCardStyle]}>
+            <Card user={middleCardProfile}/> 
+          </Animated.View>        
+        </View>
+      )}
 
-      <View style={styles.middleCard}>
-        <Animated.View style={[styles.animatedCard, middleCardStyle]}>
-          <Card user={middleCardProfile}/> 
-        </Animated.View>        
-      </View>
-
-      <PanGestureHandler onGestureEvent={gestureHandler}>
-        <Animated.View style={[styles.animatedCard, cardStyle]}>
-          <Card user={currentProfile}/>
-        </Animated.View>
-      </PanGestureHandler>
+      {currentProfile && (
+        <PanGestureHandler onGestureEvent={gestureHandler}>
+          <Animated.View style={[styles.animatedCard, cardStyle]}>
+            <Card user={currentProfile}/>
+          </Animated.View>
+        </PanGestureHandler>
+      )}
             
       <View style={styles.navbar}>
         <Icon name='cards-diamond' style={styles.navIcon}/>
@@ -164,11 +182,14 @@ const styles = StyleSheet.create({
     fontSize: 60,
     color: 'white',
     fontWeight: 'bold',
-    marginTop: 6,
+    marginTop: 5,
+    marginBottom: 5,
   },
 
   navbar: {
-    flex: 1,
+    flex: 5,
+    position: 'absolute',
+    bottom: 0,
     flexDirection: 'row',
     width: '100%',
     marginTop: 20,
