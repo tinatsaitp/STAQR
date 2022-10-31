@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     marginTop: 20,
     alignItems: 'center',
-    width: '90%',
+    width: '100%',
     height: '85%',
     borderRadius: 20,
     backgroundColor: '#afeeee',
