@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, useWindowDimensions} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {snapPoint} from "react-native-redash";
 import Animated, {
   useSharedValue,
@@ -27,8 +26,8 @@ const AnimatedStack = gestureHandlerRootHOC((props) => {
   const backCardProfile = data[backCardIndex];
 
   const {width: screenWidth, height: screenHeight} = useWindowDimensions();
-  const SNAP_POINTS_X = [-screenWidth, 0, screenWidth];
-  const SNAP_POINTS_Y = [-screenHeight, 0, screenHeight];
+  const SNAP_POINTS_X = [-(screenWidth*2), 0, screenWidth*2];
+  const SNAP_POINTS_Y = [-(screenHeight*2), 0, screenHeight*2];
   //const hiddenTranslate = 2 * screenWidth;
 
   const translateX = useSharedValue(0);
