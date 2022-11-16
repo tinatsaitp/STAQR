@@ -7,20 +7,22 @@ const Card = (props) => {
   return (
     <View style={styles.cardContainer}>
         <View style={styles.card}>
+          <View style={styles.cardImage}>
             <ImageBackground source={{
-            uri: image,
-            }}
-            style={styles.image}>
-            <Text style={styles.content}>{content}</Text>
+              uri: image,
+              }}
+              style={styles.image}>
+              <Text style={styles.content}>{content}</Text>
             </ImageBackground>
-            <View style={styles.numBar}>
+          </View>
+          <View style={styles.numBar}>
             <Text style={styles.num}> 1.1K </Text>
             <Text style={styles.num}> 1.1K </Text>
-            </View>
-            <View style={styles.numBar}>
+          </View>
+          <View style={styles.numBar}>
             <Icon name='cards-heart' style={styles.numIcon}/>
             <Icon name='cards-spade' style={styles.numIcon}/>
-            </View>
+          </View>
         </View>
     </View>
   );
@@ -42,7 +44,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.8,
     shadowRadius: 15,
-
     elevation: 8,
   },
 
@@ -53,12 +54,20 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   
+  cardImage: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    width: 310,
+    marginLeft: 20,
+    marginRight: 20,
+    //backgroundColor: 'red',
+  },
+  
   image: {
     width: '100%',
     height: '100%',
     borderRadius: 10,
     overflow: 'hidden',
-
     justifyContent: 'flex-end',
   },
 
@@ -84,22 +93,6 @@ const styles = StyleSheet.create({
   numIcon: {
     fontSize: 40,
     color: '#3ec9c4',
-  },
-
-  navIcon: {
-    fontSize: 60,
-    color: 'white',
-    fontWeight: 'bold',
-    marginTop: 7,
-  },
-
-  navbar: {
-    flex: 1,
-    flexDirection: 'row',
-    width: '100%',
-    marginTop: 20,
-    backgroundColor: '#3ec9c4',
-    justifyContent: 'space-evenly',    
   },
 });
 
