@@ -27,4 +27,11 @@ export default [
             'https://www.halfbakedharvest.com/wp-content/uploads/2021/04/One-Pot-Creamy-Penne-Alfredo-with-Spicy-Arugula-1.jpg',
         content: 'Alfredo is my favorite flavor of pasta. It tastes so GOOD. I can eat it all day! #pasta #alfredo #lunch'
     },
+    {
+        id: '5',
+        name: 'Thomas',
+        image:
+            'https://www.saltandlavender.com/wp-content/uploads/2020/11/ground-beef-tacos-recipe-1.jpg',
+        content: 'Taco is my favorite #taco #snack'
+    },
 ]
