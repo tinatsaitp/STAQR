@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Text, ImageBackground, TextInput, Dimensions, Pressable} from 'react-native';
-import Animated, {useSharedValue, useAnimatedStyle, interpolate, withTiming, withDelay, withSequence, withSpring} from 'react-native-reanimated';
+import Animated, {useSharedValue, useAnimatedStyle, interpolate, withTiming, withDelay} from 'react-native-reanimated';
 
-const LoginScreen = () => {
+
+
+const LoginScreen = ({navigation}) => {
+
+  const homepage = () => navigation.navigate('Home');
+
   const image = {uri: "https://cdn.discordapp.com/attachments/1014586144681373738/1042290324275482644/login_image.jpg"};
   const {width, height} = Dimensions.get('window');
   const imagePosition = useSharedValue(1);
@@ -96,7 +101,7 @@ const LoginScreen = () => {
           )}
 
           <Animated.View style={[styles.formButton, formButtonAnimatedStyle]}>
-            <Pressable onPress={() => formButtonScale.value = withSequence(withSpring(1.1), withSpring(1))}>
+            <Pressable onPress={homepage}>
               <Text style={styles.buttonText}> {isRegistering ? 'REGISTER' : 'LOGIN'} </Text>
             </Pressable>
           </Animated.View>
@@ -109,14 +114,13 @@ const LoginScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'flex-end',
-    //backgroundColor: 'yellow',
+    height: '100%',
+    backgroundColor: 'white',
   },
 
   image: {
-    flex: 1,
-    //height: '120%',
+    height: '101%',
   },
 
   closeButtonContainer: {
