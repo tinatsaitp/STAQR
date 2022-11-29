@@ -157,9 +157,12 @@ const AnimatedStack = gestureHandlerRootHOC((props) => {
 
 const styles = StyleSheet.create({
   root: {
+    alignSelf: 'center',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    flex: 1,
+    height: '100%',
+    width: '88%',
+    //backgroundColor:'yellow',
   },
 
   animatedCard: {
