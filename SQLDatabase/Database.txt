@@ -1,0 +1,34 @@
+CREATE table users(
+user_id SERIAL,
+username VARCHAR(25)
+);
+
+CREATE table user_info(
+email VARCHAR(50),
+user_id SERIAL,
+creation_date DATE,
+affiliation VARCHAR(50)
+);
+//is this unwise because it depends on corresponding updates to be correct/correlated with users
+//I don't think so?
+CREATE table passwords(
+user_id INT,
+password VARCHAR(25)
+);
+
+CREATE table posts(
+post_id SERIAL,
+
+title VARCHAR(50),
+user_id INT,
+time TIME
+);
+
+CREATE table engagement(
+likes INT,
+comments INT,
+views INT,
+post_id INT,
+tags VARCHAR(200)
+);
+

@@ -1,0 +1,26 @@
+
+//insert into users
+INSERT INTO users (username)
+VALUES('Yun-Ting');
+
+INSERT INTO users (username)
+VALUES('Tahsin');
+
+INSERT INTO users (username)
+VALUES('Liam');
+
+INSERT INTO users (username)
+VALUES('Justin');
+
+//insert into userinfo
+INSERT INTO user_info (email, date)
+VALUES('YunTing@gmail.com', 2022-11-30);
+
+INSERT INTO user_info (email, date)
+VALUES('Tahsin@gmail.com', 2022-11-30);
+
+INSERT INTO user_info (email, date)
+VALUES('liamkelkins@gmail.com', 2022-11-30);
+
+INSERT INTO user_info (email, date)
+VALUES('justinweber@gmail.com', 2022-11-30);
