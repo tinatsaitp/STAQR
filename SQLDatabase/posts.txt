@@ -1,0 +1,29 @@
+CREATE table posts(
+post_id SERIAL,
+username VARCHAR(50),
+image VARCHAR(300),
+content VARCHAR(300),
+user_id INT,
+time TIME
+);
+
+
+INSERT INTO posts (username, image, content)
+VALUES('Yun-Ting', 'https://www.skinnytaste.com/wp-content/uploads/2022/03/Air-Fryer-Steak-6.jpg', 'Woohoo! Just got a delicious dinner -- I like it medium rare! Gotta get that protein! #steak #dinner');
+
+INSERT INTO posts (username, image, content)
+VALUES('Tahsin', 'https://secureservercdn.net/45.40.153.24/m28.ed7.myftpupload.com/wp-content/uploads/2022/02/Cargo-HandBurger-400x516.jpg', 'This burger is so GOOD! Will come back to eat again. #hamburger #lunch');
+
+INSERT INTO posts (username, image, content)
+VALUES('Justin', 'https://cookieandkate.com/images/2020/10/best-veggie-pizza-recipe-1.jpg', 'Delicious pizza -- Vegetables go well with pizza! #pizza #dinner');
+
+INSERT INTO posts (username, image, content)
+VALUES('Liam', 'https://www.halfbakedharvest.com/wp-content/uploads/2021/04/One-Pot-Creamy-Penne-Alfredo-with-Spicy-Arugula-1.jpg', 'Alfredo is my favorite flavor of pasta. It tastes so GOOD. I can eat it all day! #pasta #alfredo #lunch');
+
+
+
+create table likes(
+username VARCHAR(50),
+user_id INT,
+post_id INT
+);
