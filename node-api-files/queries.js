@@ -17,6 +17,16 @@ const getUsers = (request, response) => {
     })
 }
 
+//gets a list of all users
+const getPosts = (request, response) => {
+    pool.query('SELECT * FROM posts', (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+    })
+}
+
 //gets a user by id number
 const getUserById = (request, response) => {
     const user_id = parseInt(request.params.user_id)
@@ -80,16 +90,17 @@ const deleteUser = (request, response) => {
     })
 }
 
-//gets a post
+/* //gets a post
 const getPost = (request, response) => {
     const post_id = parseInt(request.params.post_id)
-    pool.query('SELECT * FROM posts WHERE post_id = $1', [post_id], (error, results) => {
+    //deleted WHERE post_id = $1
+    pool.query('SELECT * FROM posts', [post_id], (error, results) => {
         if (error) {
             throw error
         }
         response.status(200).json(results.rows)
     })
-}
+} */
 
 //gets engagement
 const getEngagement = (request, response) => {
@@ -109,6 +120,6 @@ module.exports = {
     createUser,
     updateUser,
     deleteUser,
-    getPost,
+    getPosts,
     getEngagement,
 }
