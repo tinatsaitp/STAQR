@@ -1,4 +1,4 @@
-export default [
+/*export default [
     {
         id: '1',
         name: 'Tina',
@@ -27,11 +27,34 @@ export default [
             'https://www.halfbakedharvest.com/wp-content/uploads/2021/04/One-Pot-Creamy-Penne-Alfredo-with-Spicy-Arugula-1.jpg',
         content: 'Alfredo is my favorite flavor of pasta. It tastes so GOOD. I can eat it all day! #pasta #alfredo #lunch'
     },
-    {
-        id: '5',
-        name: 'Thomas',
-        image:
-            'https://www.saltandlavender.com/wp-content/uploads/2020/11/ground-beef-tacos-recipe-1.jpg',
-        content: 'Taco is my favorite #taco #snack'
-    },
-]
+] */
+
+import React from 'react';
+import axios from 'axios';
+
+export default class PersonList extends React.Component {
+  state = {
+    persons: []
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:3000/posts`)
+      .then(res => {
+        const persons = res.data;
+        this.setState({ persons });
+      })
+  }
+
+  render() {
+    return (
+      <ul>
+        {
+          this.state.persons
+            .map(person =>
+              <li key={person.id}>{person.name}</li>
+            )
+        }
+      </ul>
+    )
+  }
+}
