@@ -1,0 +1,76 @@
+CREATE table users(
+user_id SERIAL,
+password VARCHAR(50),
+token VARCHAR(5),
+username VARCHAR(25)
+);
+
+
+INSERT INTO users (username, password, token)
+VALUES('Yun-Ting', 'password1', 'abc');
+
+INSERT INTO users (username, password, token)
+VALUES('Tahsin', 'password2', 'a1c');
+
+INSERT INTO users (username, password, token)
+VALUES('Liam', 'password3', 'ab2');
+
+INSERT INTO users (username, password, token)
+VALUES('Justin', 'password4', '3bc');
+CREATE table user_info(
+email VARCHAR(50),
+user_id SERIAL,
+creation_date DATE,
+affiliation VARCHAR(50)
+);
+
+CREATE table user_info(
+email VARCHAR(50),
+user_id SERIAL,
+creation_date DATE,
+affiliation VARCHAR(50)
+);
+
+//insert into userinfo
+INSERT INTO user_info (email, date)
+VALUES('YunTing@gmail.com', 2022-11-30);
+
+INSERT INTO user_info (email, date)
+VALUES('Tahsin@gmail.com', 2022-11-30);
+
+INSERT INTO user_info (email, date)
+VALUES('liamkelkins@gmail.com', 2022-11-30);
+
+INSERT INTO user_info (email, date)
+VALUES('justinweber@gmail.com', 2022-11-30);
+
+
+
+CREATE table posts(
+post_id SERIAL,
+name VARCHAR(50),
+image VARCHAR(300),
+content VARCHAR(300)
+);
+
+
+INSERT INTO posts (name, image, content)
+VALUES('Yun-Ting', 'https://www.skinnytaste.com/wp-content/uploads/2022/03/Air-Fryer-Steak-6.jpg', 'Woohoo! Just got a delicious dinner -- I like it medium rare! Gotta get that protein! #steak #dinner');
+
+INSERT INTO posts (name, image, content)
+VALUES('Tahsin', 'https://secureservercdn.net/45.40.153.24/m28.ed7.myftpupload.com/wp-content/uploads/2022/02/Cargo-HandBurger-400x516.jpg', 'This burger is so GOOD! Will come back to eat again. #hamburger #lunch');
+
+INSERT INTO posts (name, image, content)
+VALUES('Justin', 'https://cookieandkate.com/images/2020/10/best-veggie-pizza-recipe-1.jpg', 'Delicious pizza -- Vegetables go well with pizza! #pizza #dinner');
+
+INSERT INTO posts (name, image, content)
+VALUES('Liam', 'https://www.halfbakedharvest.com/wp-content/uploads/2021/04/One-Pot-Creamy-Penne-Alfredo-with-Spicy-Arugula-1.jpg', 'Alfredo is my favorite flavor of pasta. It tastes so GOOD. I can eat it all day! #pasta #alfredo #lunch');
+
+
+CREATE table engagement(
+likes INT,
+comments INT,
+views INT,
+post_id INT,
+tags VARCHAR(200)
+);
