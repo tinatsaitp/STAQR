@@ -1,12 +1,21 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {View, StyleSheet, Text, ImageBackground, TextInput, Dimensions, Pressable} from 'react-native';
 import Animated, {useSharedValue, useAnimatedStyle, interpolate, withTiming, withDelay} from 'react-native-reanimated';
+import { AuthContext } from '../context/AuthContext';
+import Profile from './ProfileScreen';
 
 
 
 const LoginScreen = ({navigation}) => {
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState(null);
+  
+  // get auth context info
+  //const {register} = useContext(AuthContext);
+  const {login} = useContext(AuthContext);
 
-  const homepage = () => navigation.navigate('Home');
+  //const homepage = () => navigation.navigate('Home');
 
   const image = {uri: "https://cdn.discordapp.com/attachments/1014586144681373738/1042290324275482644/login_image.jpg"};
   const {width, height} = Dimensions.get('window');
@@ -94,15 +103,15 @@ const LoginScreen = ({navigation}) => {
         </Animated.View>
         
         <Animated.View style={[styles.formContainer, formAnimatedStyle]}>
-          <TextInput placeholder='Username' placeholderTextColor='#3ec9c4' style={styles.textInput} />
-          <TextInput placeholder='Password' placeholderTextColor='#3ec9c4' style={styles.textInput} />
+          <TextInput value={username} placeholder='Username' onChangeText={text => setUsername(text)} placeholderTextColor='#3ec9c4' style={styles.textInput} />
+          <TextInput value={password} placeholder='Password' secureTextEntry onChangeText={text => setPassword(text)} placeholderTextColor='#3ec9c4' style={styles.textInput} />
           {isRegistering && (
-            <TextInput placeholder='Email' placeholderTextColor='#3ec9c4' style={styles.textInput} />
+          <TextInput value={email} placeholder='Email' onChangeText={text => setEmail(text)} placeholderTextColor='#3ec9c4' style={styles.textInput} />
           )}
 
           <Animated.View style={[styles.formButton, formButtonAnimatedStyle]}>
-            <Pressable onPress={homepage}>
-              <Text style={styles.buttonText}> {isRegistering ? 'REGISTER' : 'LOGIN'} </Text>
+            <Pressable onPress={() => {login()}}>
+              <Text style={styles.buttonText}> {isRegistering ? 'REGISTER': 'LOGIN'} </Text>
             </Pressable>
           </Animated.View>
         </Animated.View>
