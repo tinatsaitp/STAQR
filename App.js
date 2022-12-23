@@ -1,20 +1,14 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {AuthProvider} from './src/context/AuthContext';
 import AppNavigator from './src/screens/appNavigator';
+
 
 const App = () => {
   return (
-    <View style={styles.pageContainer}>
-      <AppNavigator />
-    </View>
+      <AuthProvider>
+          <AppNavigator style={{height: '100%'}}/>
+      </AuthProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  pageContainer: {
-    height: '100%',
-    //backgroundColor: 'blue',
-  },
-});
 
 export default App;
