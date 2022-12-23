@@ -10,6 +10,7 @@ import AnimatedStack from '../components/AnimatedStack';
 const HomeScreen = ({navigation}) => {
 
   const profilePage = () => navigation.navigate('Profile');
+  const uploadPage = () => navigation.navigate('Upload');
   
   return (
     <View style={styles.root}>
@@ -19,7 +20,7 @@ const HomeScreen = ({navigation}) => {
       />
       <View style={styles.navbar}>
         <Icon name='cards-diamond' style={styles.navIcon}/>
-        <Icon name='cards-club' style={styles.navIcon}/>
+        <Icon name='cards-club' style={styles.navIcon} onPress={uploadPage}/>
         <Icon name='cards' style={styles.navIcon} onPress={profilePage}/>
       </View>
     </View>
