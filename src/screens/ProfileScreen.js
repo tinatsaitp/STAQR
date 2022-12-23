@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
@@ -8,12 +8,12 @@ import {
     MenuOption,
     MenuTrigger
 } from 'react-native-popup-menu';
-import Card from '../components/card';
-import users from '../../assets/data/users';
-import ProfileCards from '../components/ProfileCards';
+import { AuthContext } from '../context/AuthContext';
+
 
 
 const Profile = ({navigation}) => {
+    const {logout} = useContext(AuthContext);
 
     const loginPage = () => navigation.navigate('Login');
     const homepage = () => navigation.navigate('Home');
@@ -31,7 +31,7 @@ const Profile = ({navigation}) => {
                         </MenuTrigger>
                         <MenuOptions style={styles.settingWindow}>
                             <MenuOption onSelect={() => alert('Logging Out ...')}>
-                            <Text style={styles.settingWindowLogout} onPress={loginPage}>Log Out</Text>
+                            <Text style={styles.settingWindowLogout} onPress={() => {logout()}}>Log Out</Text>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
@@ -59,6 +59,11 @@ const Profile = ({navigation}) => {
             <View style={{borderWidth: StyleSheet.hairlineWidth, width:'100%',}}></View>
 
             <View style={styles.contentContainer}>
+                <View style={styles.bioGallery}>
+                    <Image style={styles.imageStyle} source={require(`../towers.jpeg`)} />
+                    <Image style={styles.imageStyle} source={require(`../towers.jpeg`)} />
+                    <Image style={styles.imageStyle} source={require(`../towers.jpeg`)} />
+                </View>
             </View>
         </View>
   );
@@ -147,6 +152,18 @@ const styles = StyleSheet.create({
         fontSize:20,
         color: '#3ec9c4',
         fontWeight: 'bold',
+    },
+
+    bioGallery: {
+        paddingTop: 30,
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "flex-start",
+    },
+
+    imageStyle: {
+        resizeMode: "contain",
+        height: 100,
     },
 
     contentContainer: {
