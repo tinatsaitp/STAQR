@@ -1,21 +1,32 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Card from '../components/card';
-import users from '../../assets/data/users';
 import AnimatedStack from '../components/AnimatedStack';
 
-
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList,StyleSheet } from 'react-native';
 
 const HomeScreen = ({navigation}) => {
 
   const profilePage = () => navigation.navigate('Profile');
   const uploadPage = () => navigation.navigate('Upload');
-  
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://10.0.2.2:3000/posts', {secure: true})
+      .then(response => response.json())
+      .then(data => {
+        setData(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <View style={styles.root}>
       <AnimatedStack
-        data={users}
+        data={data}
         renderItem={(({item}) => <Card user={item} />)}
       />
       <View style={styles.navbar}>
@@ -25,6 +36,16 @@ const HomeScreen = ({navigation}) => {
       </View>
     </View>
   );
+
+  // return (
+  //   <View>
+  //     <FlatList
+  //       data={data}
+  //       renderItem={({ item }) => <Text>{item.name}</Text>}
+  //       keyExtractor={item => item.id}
+  //     />
+  //   </View>
+  // );
 };
 
 const styles = StyleSheet.create({
